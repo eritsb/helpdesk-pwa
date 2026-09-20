@@ -24,26 +24,34 @@ function inicializarAplicacao() {
 
 
 function configurarMenuMobile() {
-
-    const menuButton =
-        document.querySelector(".menu-toggle");
-
-    const sidebar =
-        document.querySelector(".sidebar");
-
+    const menuButton = document.querySelector(".menu-toggle");
+    const sidebar = document.querySelector(".sidebar");
+    const navItems = document.querySelectorAll(".nav-item");
 
     if (!menuButton || !sidebar) {
         return;
     }
 
-
-    menuButton.addEventListener("click", () => {
-
+    menuButton.addEventListener("click", (event) => {
+        event.stopPropagation();
         sidebar.classList.toggle("active");
+    });
 
+    document.addEventListener("click", (event) => {
+        const clicouNoMenu = sidebar.contains(event.target);
+        const clicouNoBotao = menuButton.contains(event.target);
+
+        if (!clicouNoMenu && !clicouNoBotao) {
+            sidebar.classList.remove("active");
+        }
+    });
+
+    navItems.forEach((item) => {
+        item.addEventListener("click", () => {
+            sidebar.classList.remove("active");
+        });
     });
 }
-
 
 function configurarFormulario() {
 
