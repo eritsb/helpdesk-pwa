@@ -1,29 +1,35 @@
-const chamados = [
-    {
-        id: 1,
-        titulo: "Computador não liga",
-        descricao: "Computador do setor administrativo não está ligando.",
-        categoria: "Hardware",
-        prioridade: "Alta",
-        status: "Aberto"
-    },
-    {
-        id: 2,
-        titulo: "Impressora sem conexão",
-        descricao: "A impressora não está sendo reconhecida pela rede.",
-        categoria: "Redes",
-        prioridade: "Média",
-        status: "Em andamento"
-    },
-    {
-        id: 3,
-        titulo: "Acesso ao sistema",
-        descricao: "Usuário não consegue acessar o sistema interno.",
-        categoria: "Software",
-        prioridade: "Baixa",
-        status: "Concluído"
-    }
-];
+let chamados = carregarChamados();
+
+if (!chamados) {
+    chamados = [
+        {
+            id: 1,
+            titulo: "Computador não liga",
+            descricao: "Computador do setor administrativo não está ligando.",
+            categoria: "Hardware",
+            prioridade: "Alta",
+            status: "Aberto"
+        },
+        {
+            id: 2,
+            titulo: "Impressora sem conexão",
+            descricao: "A impressora não está sendo reconhecida pela rede.",
+            categoria: "Redes",
+            prioridade: "Média",
+            status: "Em andamento"
+        },
+        {
+            id: 3,
+            titulo: "Acesso ao sistema",
+            descricao: "Usuário não consegue acessar o sistema interno.",
+            categoria: "Software",
+            prioridade: "Baixa",
+            status: "Concluído"
+        }
+    ];
+
+    salvarChamados(chamados);
+}
 
 function adicionarChamado(chamado) {
     const novoChamado = {
@@ -36,6 +42,8 @@ function adicionarChamado(chamado) {
     };
 
     chamados.push(novoChamado);
+
+    salvarChamados(chamados);
 
     return novoChamado;
 }
