@@ -454,6 +454,36 @@
     </div>
 </div>
 
+<div class="camera-section">
+
+    <div class="camera-header">
+        <div>
+            <label>Foto do chamado</label>
+            <p>Registre uma imagem para auxiliar na identificação do problema.</p>
+        </div>
+    </div>
+
+    <div class="camera-container">
+        <video id="camera-preview" autoplay playsinline></video>
+        <img id="camera-photo" alt="Foto capturada do chamado">
+    </div>
+
+    <div class="camera-actions">
+        <button type="button" class="btn-secondary" id="btn-abrir-camera">
+            Abrir câmera
+        </button>
+
+        <button type="button" class="btn-primary" id="btn-capturar-foto">
+            Capturar foto
+        </button>
+
+        <button type="button" class="btn-secondary" id="btn-fechar-camera">
+            Fechar câmera
+        </button>
+    </div>
+
+</div>
+
                     <!-- BOTÕES -->
                     <div class="form-actions">
 
@@ -548,6 +578,7 @@
     <!-- JAVASCRIPT -->
     <script src="js/storage.js"></script>
     <script src="js/api.js"></script>
+    <script src="js/camera.js"></script>
     <script src="js/chamados.js"></script>
     <script src="js/app.js"></script>
 

@@ -14,6 +14,8 @@ function inicializarAplicacao() {
     configurarPesquisa();
     
     configurarCep();
+
+    configurarCamera();
    
     renderizarChamados();
     
@@ -68,9 +70,9 @@ function configurarFormulario() {
     rua: document.getElementById("rua").value.trim(),
     bairro: document.getElementById("bairro").value.trim(),
     cidade: document.getElementById("cidade").value.trim(),
-    estado: document.getElementById("estado").value.trim()
+    estado: document.getElementById("estado").value.trim(),
+    foto: fotoCapturada
 };
-
 
         if (
             !novoChamado.titulo ||
@@ -366,7 +368,21 @@ function criarCardChamado(chamado) {
 
                 <div class="ticket-details" id="detalhes-${chamado.id}">
 
-                    <div class="ticket-description">
+    ${
+        chamado.foto
+            ? `
+                <div class="ticket-photo">
+                    <strong>Foto do chamado</strong>
+                    <img
+                        src="${chamado.foto}"
+                        alt="Foto do chamado"
+                    >
+                </div>
+            `
+            : ""
+    }
+
+    <div class="ticket-description">
                         <strong>Descrição</strong>
                         <p>${chamado.descricao}</p>
                     </div>
@@ -409,6 +425,46 @@ function alternarDetalhesChamado(id) {
 
     detalhes.classList.toggle("expanded");
     card.classList.toggle("expanded");
+}
+
+let fotoCapturada = null;
+
+function configurarCamera() {
+    const video = document.getElementById("camera-preview");
+    const foto = document.getElementById("camera-photo");
+    const abrirCamera = document.getElementById("btn-abrir-camera");
+    const capturar = document.getElementById("btn-capturar-foto");
+    const fecharCamera = document.getElementById("btn-fechar-camera");
+
+    if (!video || !foto || !abrirCamera || !capturar || !fecharCamera) {
+        return;
+    }
+
+    abrirCamera.addEventListener("click", async () => {
+        const cameraIniciada = await iniciarCamera(video);
+
+        if (!cameraIniciada) {
+            alert("Não foi possível acessar a câmera.");
+        }
+    });
+
+    capturar.addEventListener("click", () => {
+        const imagem = capturarFoto(video);
+
+        if (!imagem) {
+            alert("Abra a câmera antes de capturar uma foto.");
+            return;
+        }
+
+        fotoCapturada = imagem;
+        foto.src = imagem;
+        foto.style.display = "block";
+    });
+
+    fecharCamera.addEventListener("click", () => {
+        pararCamera();
+        video.srcObject = null;
+    });
 }
 
 

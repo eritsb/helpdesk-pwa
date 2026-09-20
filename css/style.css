@@ -1141,3 +1141,18 @@ body {
     color: var(--secondary-text);
     line-height: 1.6;
 }
+
+.ticket-photo {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.ticket-photo img {
+    width: 100%;
+    max-width: 500px;
+    max-height: 400px;
+    object-fit: contain;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+}

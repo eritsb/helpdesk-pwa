@@ -43,6 +43,7 @@ function adicionarChamado(chamado) {
     bairro: chamado.bairro,
     cidade: chamado.cidade,
     estado: chamado.estado,
+    foto: chamado.foto,
     status: "Aberto"
 };
 
