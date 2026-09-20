@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
 
@@ -10,10 +11,10 @@
 
     <meta
         name="description"
-        content="Sistema de gerenciamento de chamados de suporte técnico."
+        content="Sistema de HelpDesk para gerenciamento de chamados de suporte"
     >
 
-    <title>HelpDesk</title>
+    <title>HelpDesk | Dashboard</title>
 
     <link
         rel="stylesheet"
@@ -23,459 +24,461 @@
 
 <body>
 
-    <div class="app">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
 
-        <!-- Sidebar -->
-        <aside class="sidebar" id="sidebar">
+        <div class="logo">
+            <div class="logo-icon">
+                HD
+            </div>
 
-            <div class="sidebar__brand">
-                <div class="brand-icon">
-                    H
-                </div>
+            <div class="logo-text">
+                <strong>HelpDesk</strong>
+                <span>Suporte</span>
+            </div>
+        </div>
+
+        <nav class="navigation">
+
+            <a href="#" class="nav-item active">
+                <span class="nav-icon">⌂</span>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="#chamados" class="nav-item">
+                <span class="nav-icon">▤</span>
+                <span>Chamados</span>
+            </a>
+
+            <a href="#novo-chamado" class="nav-item" id="nav-novo-chamado">
+                <span class="nav-icon">＋</span>
+                <span>Novo chamado</span>
+            </a>
+
+            <a href="#" class="nav-item">
+                <span class="nav-icon">⚙</span>
+                <span>Configurações</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-footer">
+            <span>Sistema HelpDesk</span>
+            <small>Versão 1.0</small>
+        </div>
+
+    </aside>
+
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <div class="main-wrapper">
+
+        <!-- HEADER -->
+        <header class="topbar">
+
+            <div class="topbar-left">
+
+                <button
+                    class="menu-toggle"
+                    type="button"
+                    aria-label="Abrir menu"
+                >
+                    ☰
+                </button>
 
                 <div>
-                    <h1>HelpDesk</h1>
-                    <span>Suporte técnico</span>
+                    <h1>Dashboard</h1>
+                    <p>Visão geral dos chamados de suporte</p>
                 </div>
+
             </div>
 
-            <nav class="sidebar__navigation">
 
-                <span class="navigation__title">
-                    PRINCIPAL
-                </span>
+            <div class="topbar-right">
 
-                <a
-                    href="#dashboard"
-                    class="navigation__item navigation__item--active"
-                >
-                    <span class="navigation__icon">⌂</span>
-                    <span>Dashboard</span>
-                </a>
+                <div class="search-box">
+                    <span>⌕</span>
 
-                <a
-                    href="#chamados"
-                    class="navigation__item"
-                >
-                    <span class="navigation__icon">▤</span>
-                    <span>Chamados</span>
-                </a>
-
-                <a
-                    href="#novo-chamado"
-                    class="navigation__item"
-                >
-                    <span class="navigation__icon">＋</span>
-                    <span>Novo chamado</span>
-                </a>
-
-                <span class="navigation__title navigation__title--secondary">
-                    SISTEMA
-                </span>
-
-                <a
-                    href="#configuracoes"
-                    class="navigation__item"
-                >
-                    <span class="navigation__icon">⚙</span>
-                    <span>Configurações</span>
-                </a>
-
-            </nav>
-
-            <div class="sidebar__footer">
-                <div class="user-card">
-                    <div class="user-card__avatar">
-                        ES
-                    </div>
-
-                    <div class="user-card__info">
-                        <strong>Equipe de suporte</strong>
-                        <span>Administrador</span>
-                    </div>
+                    <input
+                        type="search"
+                        placeholder="Pesquisar chamados..."
+                        aria-label="Pesquisar chamados"
+                    >
                 </div>
+
+                <button
+                    class="notification-button"
+                    type="button"
+                    aria-label="Notificações"
+                >
+                    ♢
+                </button>
+
+                <div class="user-profile">
+
+                    <div class="user-avatar">
+                        E
+                    </div>
+
+                    <div class="user-info">
+                        <strong>Usuário</strong>
+                        <span>Suporte</span>
+                    </div>
+
+                </div>
+
             </div>
 
-        </aside>
+        </header>
 
 
-        <!-- Conteúdo principal -->
+        <!-- MAIN -->
         <main class="main-content">
 
-            <!-- Header -->
-            <header class="header">
+            <!-- TÍTULO -->
+            <section class="welcome-section">
 
-                <div class="header__left">
+                <div>
+                    <h2>Olá, seja bem-vindo!</h2>
 
-                    <button
-                        class="menu-button"
-                        id="menuButton"
-                        aria-label="Abrir menu"
-                    >
-                        ☰
-                    </button>
+                    <p>
+                        Acompanhe e gerencie os chamados de suporte.
+                    </p>
+                </div>
 
-                    <div class="header__search">
-                        <span>⌕</span>
+                <button
+                    class="btn-primary"
+                    id="btn-novo-chamado"
+                    type="button"
+                >
+                    + Novo chamado
+                </button>
 
-                        <input
-                            type="search"
-                            placeholder="Pesquisar chamados..."
-                            aria-label="Pesquisar chamados"
-                        >
+            </section>
+
+
+            <!-- ESTATÍSTICAS -->
+            <section class="stats-grid">
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        #
+                    </div>
+
+                    <div class="stat-info">
+                        <span>Total de chamados</span>
+                        <strong id="total-chamados">0</strong>
                     </div>
 
                 </div>
 
-                <div class="header__right">
 
-                    <button
-                        class="header-button"
-                        aria-label="Notificações"
-                    >
-                        ♧
-                    </button>
+                <div class="stat-card">
 
-                    <div class="header__user">
-                        <div class="header__avatar">
-                            ES
-                        </div>
+                    <div class="stat-icon">
+                        !
+                    </div>
 
-                        <div class="header__user-info">
-                            <strong>Equipe de suporte</strong>
-                            <span>Administrador</span>
-                        </div>
+                    <div class="stat-info">
+                        <span>Abertos</span>
+                        <strong id="chamados-abertos">0</strong>
                     </div>
 
                 </div>
 
-            </header>
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        ↻
+                    </div>
+
+                    <div class="stat-info">
+                        <span>Em andamento</span>
+                        <strong id="chamados-andamento">0</strong>
+                    </div>
+
+                </div>
 
 
-            <!-- Dashboard -->
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        ✓
+                    </div>
+
+                    <div class="stat-info">
+                        <span>Concluídos</span>
+                        <strong id="chamados-concluidos">0</strong>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- CHAMADOS RECENTES -->
             <section
-                class="dashboard"
-                id="dashboard"
+                class="recent-tickets"
+                id="chamados"
             >
 
-                <div class="page-header">
+                <div class="section-header">
 
                     <div>
-                        <span class="page-header__eyebrow">
-                            VISÃO GERAL
-                        </span>
-
-                        <h2>Dashboard</h2>
+                        <h2>Chamados recentes</h2>
 
                         <p>
-                            Acompanhe os chamados e as atividades recentes.
+                            Últimos chamados registrados no sistema
                         </p>
                     </div>
 
                     <button
-                        class="button button--primary"
-                        id="newTicketButton"
+                        class="btn-secondary"
+                        id="btn-ver-chamados"
+                        type="button"
                     >
-                        <span>＋</span>
-                        Novo chamado
+                        Ver todos
                     </button>
 
                 </div>
 
 
-                <!-- Cards -->
-                <section class="stats-grid">
+                <div
+                    class="tickets-list"
+                    id="tickets-list"
+                >
+                    <!--
+                        Os chamados serão inseridos
+                        automaticamente pelo JavaScript.
+                    -->
+                </div>
 
-                    <article class="stat-card">
-
-                        <div class="stat-card__header">
-                            <span class="stat-card__label">
-                                Total de chamados
-                            </span>
-
-                            <div class="stat-card__icon stat-card__icon--purple">
-                                #
-                            </div>
-                        </div>
-
-                        <strong class="stat-card__value">
-                            40
-                        </strong>
-
-                        <span class="stat-card__description">
-                            chamados registrados
-                        </span>
-
-                    </article>
+            </section>
 
 
-                    <article class="stat-card">
+            <!-- NOVO CHAMADO -->
+            <section
+                class="new-ticket-section hidden"
+                id="new-ticket-section"
+            >
 
-                        <div class="stat-card__header">
-                            <span class="stat-card__label">
-                                Chamados abertos
-                            </span>
+                <div class="section-header">
 
-                            <div class="stat-card__icon stat-card__icon--blue">
-                                !
-                            </div>
-                        </div>
+                    <div>
+                        <h2>Novo chamado</h2>
 
-                        <strong class="stat-card__value">
-                            12
-                        </strong>
+                        <p>
+                            Registre uma nova solicitação de suporte
+                        </p>
+                    </div>
 
-                        <span class="stat-card__description">
-                            aguardando atendimento
-                        </span>
-
-                    </article>
+                </div>
 
 
-                    <article class="stat-card">
+                <form
+                    id="new-ticket-form"
+                    class="ticket-form"
+                >
 
-                        <div class="stat-card__header">
-                            <span class="stat-card__label">
-                                Em andamento
-                            </span>
+                    <!-- TÍTULO -->
+                    <div class="form-group">
 
-                            <div class="stat-card__icon stat-card__icon--orange">
-                                ↻
-                            </div>
-                        </div>
+                        <label for="titulo">
+                            Título
+                        </label>
 
-                        <strong class="stat-card__value">
-                            5
-                        </strong>
-
-                        <span class="stat-card__description">
-                            em atendimento
-                        </span>
-
-                    </article>
-
-
-                    <article class="stat-card">
-
-                        <div class="stat-card__header">
-                            <span class="stat-card__label">
-                                Concluídos
-                            </span>
-
-                            <div class="stat-card__icon stat-card__icon--green">
-                                ✓
-                            </div>
-                        </div>
-
-                        <strong class="stat-card__value">
-                            23
-                        </strong>
-
-                        <span class="stat-card__description">
-                            finalizados
-                        </span>
-
-                    </article>
-
-                </section>
-
-
-                <!-- Chamados recentes -->
-                <section class="content-section">
-
-                    <div class="section-header">
-
-                        <div>
-                            <h3>Chamados recentes</h3>
-
-                            <p>
-                                Acompanhe os últimos chamados registrados.
-                            </p>
-                        </div>
-
-                        <a
-                            href="#chamados"
-                            class="section-link"
+                        <input
+                            type="text"
+                            id="titulo"
+                            name="titulo"
+                            placeholder="Ex.: Computador não liga"
+                            required
                         >
-                            Ver todos
-                        </a>
 
                     </div>
 
 
-                    <div class="tickets-card">
+                    <!-- DESCRIÇÃO -->
+                    <div class="form-group">
 
-                        <div class="ticket">
+                        <label for="descricao">
+                            Descrição
+                        </label>
 
-                            <div class="ticket__main">
+                        <textarea
+                            id="descricao"
+                            name="descricao"
+                            placeholder="Descreva o problema..."
+                            required
+                        ></textarea>
 
-                                <div class="ticket__id">
-                                    #001
-                                </div>
-
-                                <div>
-                                    <h4>
-                                        Computador não liga
-                                    </h4>
-
-                                    <span>
-                                        Hardware
-                                    </span>
-                                </div>
-
-                            </div>
-
-                            <div class="ticket__status">
-                                <span class="priority priority--high">
-                                    Alta
-                                </span>
-
-                                <span class="status status--open">
-                                    Aberto
-                                </span>
-                            </div>
-
-                            <span class="ticket__date">
-                                Hoje, 09:32
-                            </span>
-
-                        </div>
+                    </div>
 
 
-                        <div class="ticket">
+                    <!-- CATEGORIA E PRIORIDADE -->
+                    <div class="form-row">
 
-                            <div class="ticket__main">
+                        <div class="form-group">
 
-                                <div class="ticket__id">
-                                    #002
-                                </div>
+                            <label for="categoria">
+                                Categoria
+                            </label>
 
-                                <div>
-                                    <h4>
-                                        Impressora sem conexão
-                                    </h4>
+                            <select
+                                id="categoria"
+                                name="categoria"
+                                required
+                            >
 
-                                    <span>
-                                        Redes
-                                    </span>
-                                </div>
+                                <option value="">
+                                    Selecione
+                                </option>
 
-                            </div>
+                                <option value="Hardware">
+                                    Hardware
+                                </option>
 
-                            <div class="ticket__status">
-                                <span class="priority priority--medium">
-                                    Média
-                                </span>
+                                <option value="Software">
+                                    Software
+                                </option>
 
-                                <span class="status status--progress">
-                                    Em andamento
-                                </span>
-                            </div>
+                                <option value="Redes">
+                                    Redes
+                                </option>
 
-                            <span class="ticket__date">
-                                Hoje, 08:47
-                            </span>
+                                <option value="Acesso">
+                                    Acesso
+                                </option>
+
+                                <option value="Outro">
+                                    Outro
+                                </option>
+
+                            </select>
 
                         </div>
 
 
-                        <div class="ticket">
+                        <div class="form-group">
 
-                            <div class="ticket__main">
+                            <label for="prioridade">
+                                Prioridade
+                            </label>
 
-                                <div class="ticket__id">
-                                    #003
-                                </div>
+                            <select
+                                id="prioridade"
+                                name="prioridade"
+                                required
+                            >
 
-                                <div>
-                                    <h4>
-                                        Acesso ao sistema
-                                    </h4>
+                                <option value="">
+                                    Selecione
+                                </option>
 
-                                    <span>
-                                        Software
-                                    </span>
-                                </div>
-
-                            </div>
-
-                            <div class="ticket__status">
-                                <span class="priority priority--low">
+                                <option value="Baixa">
                                     Baixa
-                                </span>
+                                </option>
 
-                                <span class="status status--completed">
-                                    Concluído
-                                </span>
-                            </div>
+                                <option value="Média">
+                                    Média
+                                </option>
 
-                            <span class="ticket__date">
-                                Ontem, 16:20
-                            </span>
+                                <option value="Alta">
+                                    Alta
+                                </option>
+
+                            </select>
 
                         </div>
 
                     </div>
 
-                </section>
 
+                    <!-- BOTÕES -->
+                    <div class="form-actions">
 
-                <!-- Ações rápidas -->
-                <section class="quick-actions">
-
-                    <div class="section-header">
-
-                        <div>
-                            <h3>Ações rápidas</h3>
-
-                            <p>
-                                Acesse rapidamente as principais funções.
-                            </p>
-                        </div>
-
-                    </div>
-
-
-                    <div class="quick-actions__grid">
-
-                        <button class="quick-action">
-                            <span class="quick-action__icon">
-                                ＋
-                            </span>
-
-                            <span>
-                                <strong>Novo chamado</strong>
-                                <small>Registrar problema</small>
-                            </span>
+                        <button
+                            type="button"
+                            class="btn-secondary"
+                            id="btn-cancelar-chamado"
+                        >
+                            Cancelar
                         </button>
 
-
-                        <button class="quick-action">
-                            <span class="quick-action__icon">
-                                ▤
-                            </span>
-
-                            <span>
-                                <strong>Ver chamados</strong>
-                                <small>Consultar chamados</small>
-                            </span>
-                        </button>
-
-
-                        <button class="quick-action">
-                            <span class="quick-action__icon">
-                                ⚙
-                            </span>
-
-                            <span>
-                                <strong>Configurações</strong>
-                                <small>Gerenciar sistema</small>
-                            </span>
+                        <button
+                            type="submit"
+                            class="btn-primary"
+                        >
+                            Criar chamado
                         </button>
 
                     </div>
 
-                </section>
+                </form>
+
+            </section>
+
+
+            <!-- AÇÕES RÁPIDAS -->
+            <section class="quick-actions">
+
+                <div class="section-header">
+
+                    <div>
+                        <h2>Ações rápidas</h2>
+
+                        <p>
+                            Acesse rapidamente as principais funções
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="quick-actions-grid">
+
+                    <button
+                        class="quick-action-card"
+                        id="btn-abrir-chamado"
+                        type="button"
+                    >
+
+                        <span class="quick-action-icon">
+                            +
+                        </span>
+
+                        <span>
+                            <strong>Novo chamado</strong>
+                            <small>
+                                Registrar uma solicitação
+                            </small>
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        class="quick-action-card"
+                        type="button"
+                        id="btn-abrir-lista"
+                    >
+
+                        <span class="quick-action-icon">
+                            ▤
+                        </span>
+
+                        <span>
+                            <strong>Ver chamados</strong>
+                            <small>
+                                Consultar solicitações
+                            </small>
+                        </span>
+
+                    </button>
+
+                </div>
 
             </section>
 
@@ -484,7 +487,10 @@
     </div>
 
 
+    <!-- JAVASCRIPT -->
+    <script src="js/chamados.js"></script>
     <script src="js/app.js"></script>
 
 </body>
+
 </html>
