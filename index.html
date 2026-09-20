@@ -395,6 +395,64 @@
 
                     </div>
 
+                    <div class="form-row">
+    <div class="form-group">
+        <label for="cep">CEP</label>
+        <input
+            type="text"
+            id="cep"
+            name="cep"
+            placeholder="00000-000"
+            maxlength="9"
+        >
+    </div>
+
+    <div class="form-group">
+        <label for="estado">Estado</label>
+        <input
+            type="text"
+            id="estado"
+            name="estado"
+            placeholder="UF"
+            readonly
+        >
+    </div>
+</div>
+
+<div class="form-group">
+    <label for="rua">Rua</label>
+    <input
+        type="text"
+        id="rua"
+        name="rua"
+        placeholder="Rua"
+        readonly
+    >
+</div>
+
+<div class="form-row">
+    <div class="form-group">
+        <label for="bairro">Bairro</label>
+        <input
+            type="text"
+            id="bairro"
+            name="bairro"
+            placeholder="Bairro"
+            readonly
+        >
+    </div>
+
+    <div class="form-group">
+        <label for="cidade">Cidade</label>
+        <input
+            type="text"
+            id="cidade"
+            name="cidade"
+            placeholder="Cidade"
+            readonly
+        >
+    </div>
+</div>
 
                     <!-- BOTÕES -->
                     <div class="form-actions">
@@ -489,6 +547,7 @@
 
     <!-- JAVASCRIPT -->
     <script src="js/storage.js"></script>
+    <script src="js/api.js"></script>
     <script src="js/chamados.js"></script>
     <script src="js/app.js"></script>
 

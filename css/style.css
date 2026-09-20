@@ -1096,3 +1096,48 @@ body {
     }
 
 }
+
+.ticket-card {
+    cursor: pointer;
+}
+
+.ticket-title-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.ticket-expand-icon {
+    font-size: 20px;
+    color: var(--secondary-text);
+    transition: transform 0.2s ease;
+}
+
+.ticket-card.expanded .ticket-expand-icon {
+    transform: rotate(180deg);
+}
+
+.ticket-details {
+    display: none;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+}
+
+.ticket-details.expanded {
+    display: grid;
+    gap: 18px;
+}
+
+.ticket-details strong {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--text);
+}
+
+.ticket-details p {
+    margin: 0;
+    color: var(--secondary-text);
+    line-height: 1.6;
+}

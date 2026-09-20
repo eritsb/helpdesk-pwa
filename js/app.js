@@ -4,17 +4,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 function inicializarAplicacao() {
-
+    
     configurarMenuMobile();
-
+    
     configurarFormulario();
-
+   
     configurarAcoesRapidas();
-
+    
     configurarPesquisa();
-
+    
+    configurarCep();
+   
     renderizarChamados();
-
+    
     atualizarEstatisticas();
 }
 
@@ -58,29 +60,16 @@ function configurarFormulario() {
 
 
         const novoChamado = {
-
-            titulo:
-                document
-                    .getElementById("titulo")
-                    .value
-                    .trim(),
-
-            descricao:
-                document
-                    .getElementById("descricao")
-                    .value
-                    .trim(),
-
-            categoria:
-                document
-                    .getElementById("categoria")
-                    .value,
-
-            prioridade:
-                document
-                    .getElementById("prioridade")
-                    .value
-        };
+    titulo: document.getElementById("titulo").value.trim(),
+    descricao: document.getElementById("descricao").value.trim(),
+    categoria: document.getElementById("categoria").value,
+    prioridade: document.getElementById("prioridade").value,
+    cep: document.getElementById("cep").value.trim(),
+    rua: document.getElementById("rua").value.trim(),
+    bairro: document.getElementById("bairro").value.trim(),
+    cidade: document.getElementById("cidade").value.trim(),
+    estado: document.getElementById("estado").value.trim()
+};
 
 
         if (
@@ -341,9 +330,8 @@ function renderizarChamados(termo = "") {
 
 
 function criarCardChamado(chamado) {
-
     return `
-        <article class="ticket-card">
+        <article class="ticket-card" onclick="alternarDetalhesChamado(${chamado.id})">
 
             <div class="ticket-main">
 
@@ -353,26 +341,16 @@ function criarCardChamado(chamado) {
                         #${String(chamado.id).padStart(3, "0")}
                     </span>
 
-                    <span
-                        class="status status-${normalizarClasse(
-                            chamado.status
-                        )}"
-                    >
+                    <span class="status status-${normalizarClasse(chamado.status)}">
                         ${chamado.status}
                     </span>
 
                 </div>
 
-
-                <h3>
-                    ${chamado.titulo}
-                </h3>
-
-
-                <p>
-                    ${chamado.descricao}
-                </p>
-
+                <div class="ticket-title-row">
+                    <h3>${chamado.titulo}</h3>
+                    <span class="ticket-expand-icon">⌄</span>
+                </div>
 
                 <div class="ticket-meta">
 
@@ -380,13 +358,38 @@ function criarCardChamado(chamado) {
                         ${chamado.categoria}
                     </span>
 
-                    <span
-                        class="priority priority-${normalizarClasse(
-                            chamado.prioridade
-                        )}"
-                    >
+                    <span class="priority priority-${normalizarClasse(chamado.prioridade)}">
                         ${chamado.prioridade}
                     </span>
+
+                </div>
+
+                <div class="ticket-details" id="detalhes-${chamado.id}">
+
+                    <div class="ticket-description">
+                        <strong>Descrição</strong>
+                        <p>${chamado.descricao}</p>
+                    </div>
+
+                    <div class="ticket-address">
+
+                        <strong>Endereço</strong>
+
+                        <p>
+                            ${chamado.rua || "Não informado"},
+                            ${chamado.bairro || "Não informado"}
+                        </p>
+
+                        <p>
+                            ${chamado.cidade || "Não informado"} -
+                            ${chamado.estado || "Não informado"}
+                        </p>
+
+                        <p>
+                            CEP: ${chamado.cep || "Não informado"}
+                        </p>
+
+                    </div>
 
                 </div>
 
@@ -394,6 +397,18 @@ function criarCardChamado(chamado) {
 
         </article>
     `;
+}
+
+function alternarDetalhesChamado(id) {
+    const detalhes = document.getElementById(`detalhes-${id}`);
+    const card = detalhes?.closest(".ticket-card");
+
+    if (!detalhes || !card) {
+        return;
+    }
+
+    detalhes.classList.toggle("expanded");
+    card.classList.toggle("expanded");
 }
 
 
@@ -465,4 +480,31 @@ function normalizarClasse(texto) {
             /\s+/g,
             "-"
         );
+}
+
+function configurarCep() {
+    const campoCep = document.getElementById("cep");
+
+    if (!campoCep) {
+        return;
+    }
+
+    campoCep.addEventListener("blur", async () => {
+        const cep = campoCep.value.trim();
+
+        if (!cep) {
+            return;
+        }
+
+        try {
+            const endereco = await buscarEnderecoPorCep(cep);
+
+            document.getElementById("estado").value = endereco.estado;
+            document.getElementById("rua").value = endereco.rua;
+            document.getElementById("bairro").value = endereco.bairro;
+            document.getElementById("cidade").value = endereco.cidade;
+        } catch (erro) {
+            alert(erro.message);
+        }
+    });
 }

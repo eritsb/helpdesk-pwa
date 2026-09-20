@@ -33,13 +33,18 @@ if (!chamados) {
 
 function adicionarChamado(chamado) {
     const novoChamado = {
-        id: gerarNovoId(),
-        titulo: chamado.titulo,
-        descricao: chamado.descricao,
-        categoria: chamado.categoria,
-        prioridade: chamado.prioridade,
-        status: "Aberto"
-    };
+    id: gerarNovoId(),
+    titulo: chamado.titulo,
+    descricao: chamado.descricao,
+    categoria: chamado.categoria,
+    prioridade: chamado.prioridade,
+    cep: chamado.cep,
+    rua: chamado.rua,
+    bairro: chamado.bairro,
+    cidade: chamado.cidade,
+    estado: chamado.estado,
+    status: "Aberto"
+};
 
     chamados.push(novoChamado);
 
